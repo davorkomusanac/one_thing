@@ -1,0 +1,36 @@
+name: one_thing
+description: Do the most important thing
+
+publish_to:
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  material_design_icons_flutter: ^4.0.5345
+  hive: ^1.4.2
+  hive_flutter: ^0.3.1
+  provider: ^4.3.1
+  fluttertoast: ^7.0.2
+  cupertino_icons: ^0.1.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: "^0.7.3"
+  hive_generator: ^0.7.1
+  build_runner: ^1.10.1
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/launcher_icon.png"
+
+flutter:
+  uses-material-design: true
+
+assets:
+  - assets/icon/launcher_icon.png
