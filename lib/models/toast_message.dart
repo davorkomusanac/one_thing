@@ -7,11 +7,11 @@ class ToastMessage {
 
   ToastMessage(this.context);
 
-  void showToast() {
+  void showToast(String textMessage) {
     counter++;
     var fToast = FToast(context);
     fToast.showToast(
-      child: _createToast(),
+      child: _createToast(textMessage),
       gravity: ToastGravity.BOTTOM,
       toastDuration: Duration(seconds: 2),
     );
@@ -21,7 +21,7 @@ class ToastMessage {
     }
   }
 
-  Widget _createToast() {
+  Widget _createToast(String textMessage) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 48.0),
       child: Container(
@@ -31,7 +31,7 @@ class ToastMessage {
           color: Colors.lightBlueAccent,
         ),
         child: Text(
-          "You cannot add a new task until your old one is finished",
+          textMessage,
           style: TextStyle(color: Colors.white, fontSize: 16.0),
         ),
       ),
