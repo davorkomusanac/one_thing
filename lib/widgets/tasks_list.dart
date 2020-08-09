@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_thing/utils/constants.dart';
 import 'package:one_thing/widgets/task_tile.dart';
 import 'package:provider/provider.dart';
 import 'package:one_thing/models/task_data.dart';
@@ -9,7 +10,6 @@ class TasksList extends StatelessWidget {
     return Consumer<TaskData>(
       builder: (context, taskData, child) {
         return ListView.builder(
-          //reverse: true,
           itemBuilder: (context, index) {
             final task = taskData.tasks[taskData.taskCount - 1 - index];
             return TaskTile(
@@ -23,14 +23,12 @@ class TasksList extends StatelessWidget {
                     context: context,
                     builder: (_) {
                       return AlertDialog(
-                        contentPadding: const EdgeInsets.only(
-                          left: 20.0,
-                          right: 20.0,
-                          top: 35.0,
-                          bottom: 15.0,
+                        contentPadding: kAlertDialogPadding,
+                        content: Text(
+                          'Are you sure you want to delete this task?',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 18.0),
                         ),
-                        content:
-                            Text('Are you sure you want to delete this task?'),
                         actions: [
                           FlatButton(
                             child: Text('NO'),
