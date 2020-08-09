@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_thing/models/project_name_data.dart';
 import 'package:one_thing/utils/constants.dart';
 import 'package:one_thing/utils/quotes.dart';
 import 'dart:math';
@@ -6,6 +7,9 @@ import 'package:provider/provider.dart';
 import 'package:one_thing/models/task_data.dart';
 
 class AddTaskScreen extends StatefulWidget {
+  final bool isTaskBeingAdded;
+  AddTaskScreen({this.isTaskBeingAdded});
+
   @override
   _AddTaskScreenState createState() => _AddTaskScreenState();
 }
@@ -16,6 +20,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   @override
   void initState() {
+    //Get a random number so that each time the screen is showed to the user, a new random Quote is also showed
     random = Random();
     randNum = random.nextInt(quotes.length);
     super.initState();
@@ -24,24 +29,19 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   @override
   Widget build(BuildContext context) {
     String newTaskTitle;
-    String quote;
 
     return Container(
       color: Color(0xff757575),
       child: Container(
         padding: EdgeInsets.all(20.0),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20.0),
-            topRight: Radius.circular(20.0),
-          ),
-        ),
+        decoration: kTasksListBoxDecoration,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Text(
-              'What is the One Thing you need to do right NOW?',
+              widget.isTaskBeingAdded
+                  ? 'What is the One Thing you need to do right NOW?'
+                  : 'What is the One Thing you WANT to do?',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 30.0,
@@ -49,8 +49,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               ),
             ),
             TextField(
-              //decoration: kAddActivityInputDecoration,
-              // maxLength: 30,
               autofocus: true,
               textAlign: TextAlign.center,
               onChanged: (newText) {
@@ -58,8 +56,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               },
               onSubmitted: (text) {
                 if (newTaskTitle != null && newTaskTitle.isNotEmpty) {
-                  Provider.of<TaskData>(context, listen: false)
-                      .addTask(newTaskTitle);
+                  //If isTaskBeingAdded is true then add a new task, otherwise add a new project
+                  widget.isTaskBeingAdded
+                      ? Provider.of<TaskData>(context, listen: false)
+                          .addTask(newTaskTitle)
+                      : Provider.of<ProjectNameData>(context, listen: false)
+                          .addProject(newTaskTitle);
                 }
                 Navigator.pop(context);
               },
@@ -74,20 +76,20 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               color: Colors.lightBlueAccent,
               onPressed: () {
                 if (newTaskTitle != null && newTaskTitle.isNotEmpty) {
-                  Provider.of<TaskData>(context, listen: false)
-                      .addTask(newTaskTitle);
+                  //The same code as onSubmitted, so that the user can enter data with the pressing Enter or clicking the Add button
+                  widget.isTaskBeingAdded
+                      ? Provider.of<TaskData>(context, listen: false)
+                          .addTask(newTaskTitle)
+                      : Provider.of<ProjectNameData>(context, listen: false)
+                          .addProject(newTaskTitle);
                 }
                 Navigator.pop(context);
               },
             ),
             Padding(
-              padding: const EdgeInsets.only(
-                  left: 10.0, right: 10.0, top: 30.0, bottom: 10.0),
+              padding: kQuotePadding,
               child: Text(
                 quotes[randNum],
-                // quote = quotes[2],
-                // quotes[2],
-                // quotes[Random().nextInt(quotes.length)],
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.lightBlueAccent[100],
