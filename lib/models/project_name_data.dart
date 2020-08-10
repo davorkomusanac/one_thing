@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
+import 'package:one_thing/models/task.dart';
 import 'package:one_thing/utils/constants.dart';
 
 class ProjectNameData extends ChangeNotifier {
@@ -11,10 +12,10 @@ class ProjectNameData extends ChangeNotifier {
     projectNameBox = Hive.box(kProjectNameBox);
     projectNameBox.isEmpty
         ? projectName = 'Project Name'
-        : projectName = projectNameBox.keyAt(0) as String;
+        : projectName = projectNameBox.getAt(0).name as String;
     projectNameBox.isEmpty
         ? isProjectDone = false
-        : isProjectDone = projectNameBox.getAt(0) as bool;
+        : isProjectDone = projectNameBox.getAt(0).isDone as bool;
   }
 
   void addProject(String project) {
@@ -23,13 +24,17 @@ class ProjectNameData extends ChangeNotifier {
     }
     projectName = project;
     isProjectDone = false;
-    projectNameBox.put(projectName, isProjectDone);
+    var task = Task(name: projectName);
+    task.toggleDone();
+    projectNameBox.add(task);
     notifyListeners();
   }
 
   void updateProjectStatus() {
     isProjectDone = true;
-    projectNameBox.putAt(0, isProjectDone);
+    var task = Task(name: projectName);
+    task.toggleDone();
+    projectNameBox.putAt(0, task);
     notifyListeners();
   }
 }
