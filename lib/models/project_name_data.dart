@@ -25,7 +25,6 @@ class ProjectNameData extends ChangeNotifier {
     projectName = project;
     isProjectDone = false;
     var task = Task(name: projectName);
-    task.toggleDone();
     projectNameBox.add(task);
     notifyListeners();
   }
