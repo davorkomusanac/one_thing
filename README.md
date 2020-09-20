@@ -1,16 +1,13 @@
-# one_thing
+#One Thing
 
-Do the most important thing
+This is a productivity/planner app I made in Flutter. It is a to-do app with a simple twist, only one to-do item can be active at a time. A new to-do cannot be assigned until the previous one is completed or deleted.
 
-## Getting Started
+Part of the app was made as project during a Flutter course which I took ( https://www.appbrewery.co/p/flutter-development-bootcamp-with-dart )
+So I decided to expand on that app, adding my own features and make it usable for daily use.
 
-This project is a starting point for a Flutter application.
+I used Hive for persistence storage, Provider for State Management and toast messages to notify users.
 
-A few resources to get you started if this is your first Flutter project:
+I went through the whole process of making the app (from designing the logo, signing the app, all the way to pushing the app to the Play Store) on my own.
+The app is not very popular (5+ downloads) but it is my own :) ( https://play.google.com/store/apps/details?id=com.davordev.one_thing&hl=en ).
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![](one-thing.gif)
