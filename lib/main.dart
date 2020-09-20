@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
       child: ChangeNotifierProvider(
         create: (context) => TaskData(),
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'One Thing',
           theme: ThemeData.light().copyWith(
               appBarTheme: AppBarTheme(
