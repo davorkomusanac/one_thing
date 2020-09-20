@@ -1,4 +1,4 @@
-#One Thing
+# One Thing
 
 This is a productivity/planner app I made in Flutter. It is a to-do app with a simple twist, only one to-do item can be active at a time. A new to-do cannot be assigned until the previous one is completed or deleted.
 
